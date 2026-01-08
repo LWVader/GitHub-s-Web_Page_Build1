@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head> "PDF Library" 
+<body>
+    <h1>PDF Library</h1>
+    <p>Welcome to our PDF collection</p>
+    <ul>
+        <li><a href="document1.pdf" download>Document 1</a></li>
+        <li><a href="document2.pdf" download>Document 2</a></li>
+        <li><a href="document3.pdf" download>Document 3</a></li>
+    </ul>
+    <section>
+        <h2>Purchase Access</h2>
+        <button id="paymentBtn">Purchase Full Library</button>
+    </section>
+
+    <script>
+        document.getElementById('paymentBtn').addEventListener('click', function() {
+            // Initialize payment API
+            const paymentConfig = {
+                amount: 9.99,
+                currency: 'USD',
+                description: 'PDF Library Access'
+            };
+            
+            // Call payment processor (e.g., Stripe, PayPal)
+            initializePayment(paymentConfig);
+        });
+        
+        function initializePayment(config) {
+            // Replace with your payment API endpoint
+            fetch('/api/payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(config)
+            })
+            .then(response => response.json())
+            .then(data => handlePaymentResponse(data))
+            .catch(error => console.error('Payment error:', error));
+        }
+        
+        function handlePaymentResponse(data) {
+            if(data.success) {
+                alert('Payment successful!');
+            } else {
+                alert('Payment failed. Please try again.');
+            }
+        }
+    </script>
+    
+</body>
+</html>
